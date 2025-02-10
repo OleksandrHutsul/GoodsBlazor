@@ -1,4 +1,5 @@
 using GoodsBlazor.API.Extensions;
+using GoodsBlazor.API.Middleware;
 using GoodsBlazor.BLL.Extensions;
 using GoodsBlazor.DAL.Extensions;
 using GoodsBlazor.DAL.Seeders;
@@ -19,8 +20,7 @@ try
 
     await seeder.Seed();
 
-    //app.UseMiddleware<ErrorHandlingMiddleware>();
-    //app.UseMiddleware<RequestTimeLoggingMiddleware>();
+    app.UseMiddleware<ErrorHandlingMiddleware>();
 
     app.UseSerilogRequestLogging();
 

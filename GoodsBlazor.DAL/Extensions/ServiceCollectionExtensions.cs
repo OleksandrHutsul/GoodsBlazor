@@ -16,5 +16,6 @@ public static class ServiceCollectionExtensions
                 .EnableSensitiveDataLogging());
 
         services.AddScoped<IDataSeeder, DataSeeder>();
+        
     }
 }

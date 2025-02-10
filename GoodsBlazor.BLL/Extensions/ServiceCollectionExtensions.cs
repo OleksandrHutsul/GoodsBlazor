@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using GoodsBlazor.BLL.Interfaces;
+using GoodsBlazor.BLL.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GoodsBlazor.BLL.Extensions;
@@ -16,5 +18,7 @@ public static class ServiceCollectionExtensions
             .AddFluentValidationAutoValidation();
 
         services.AddHttpContextAccessor();
+
+        services.AddScoped<IProductRepository, ProductRepository>();
     }
 }

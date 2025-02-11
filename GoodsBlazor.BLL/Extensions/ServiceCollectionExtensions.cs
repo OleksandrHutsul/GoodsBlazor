@@ -2,6 +2,7 @@
 using FluentValidation.AspNetCore;
 using GoodsBlazor.BLL.Interfaces;
 using GoodsBlazor.BLL.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GoodsBlazor.BLL.Extensions;
@@ -20,5 +21,8 @@ public static class ServiceCollectionExtensions
         services.AddHttpContextAccessor();
 
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICartItemRepository, CartItemRepository>();
+        services.AddScoped<IPasswordHasher<GoodsBlazor.DAL.Entities.User>, PasswordHasher<GoodsBlazor.DAL.Entities.User>>();
     }
 }

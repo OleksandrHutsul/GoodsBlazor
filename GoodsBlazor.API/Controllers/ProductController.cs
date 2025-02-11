@@ -13,7 +13,7 @@ namespace GoodsBlazor.API.Controllers;
 
 [ApiController]
 [Route("api/products")]
-//[Authorize]
+[Authorize]
 public class ProductController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
@@ -34,7 +34,7 @@ public class ProductController(IMediator mediator) : ControllerBase
     [HttpPatch("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    //[Authorize(Roles = nameof(Role.Admin))]
+    [Authorize(Roles = nameof(Role.Admin))]
     public async Task<IActionResult> UpdateProduct([FromRoute] int id, UpdateProductCommand command)
     {
         command.Id = id;
@@ -46,7 +46,7 @@ public class ProductController(IMediator mediator) : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    //[Authorize(Roles = nameof(Role.Admin))]
+    [Authorize(Roles = nameof(Role.Admin))]
     public async Task<IActionResult> DeleteProduct([FromRoute] int id)
     {
         await mediator.Send(new DeleteProductCommand(id));
@@ -55,7 +55,7 @@ public class ProductController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
-    //[Authorize(Roles = nameof(Role.Admin))]
+    [Authorize(Roles = nameof(Role.Admin))]
     public async Task<IActionResult> CreateProduct(CreateProductCommand command)
     {
         int id = await mediator.Send(command);

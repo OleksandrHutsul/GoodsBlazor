@@ -1,6 +1,7 @@
 {
   "name": "GoodsBlazor.Admin",
   "short_name": "GoodsBlazor.Admin",
+  "id": "./",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

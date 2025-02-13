@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GoodsBlazor.BLL.Exceptions;
 using GoodsBlazor.BLL.Interfaces;
+using GoodsBlazor.DAL.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
@@ -20,7 +21,6 @@ public class RegisterCommandHandler(IMapper mapper,
 
         var user = mapper.Map<GoodsBlazor.DAL.Entities.User>(request);
         user.PasswordHash = passwordHasher.HashPassword(user, request.Password);
-        user.Role = DAL.Entities.Role.User;
 
         int id = await userRepository.Create(user);
         return id;

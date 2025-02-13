@@ -1,0 +1,15 @@
+﻿@using GoodsBlazor.Common.Components.NavMenu
+@using GoodsBlazor.Common.Components.Models
+@using GoodsBlazor.Common.Services
+@inject AuthService AuthService
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+<NavMenuComponent BrandName="GoodsBlazor.Admin" BrandUrl="/" MenuItems="AdminMenuItems" />
+
+@code {
+    private List<NavMenuItem> AdminMenuItems = new()
+    {
+        new() { Text = "Goods", Url = "/products", IconClass = "bi bi-box-seam" }
+    };
+}

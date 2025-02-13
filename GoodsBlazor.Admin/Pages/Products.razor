@@ -1,0 +1,68 @@
+﻿@page "/products"
+@using GoodsBlazor.Shared.Dtos
+@using System.Text.Json
+@inject NavigationManager Navigation
+
+<h3>Список товарів</h3>
+
+@if (ProductList is null)
+{
+    <p>Oops, something went wrong....</p>
+}
+else if (ProductList.Count == 0)
+{
+    <p>Товари відсутні</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Опис</th>
+                <th>Ціна</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in ProductList)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price.ToString("C")</td>
+                    <td>
+                        <button class="btn btn-warning" @onclick="() => EditProduct(product.Id)">Редагувати</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteProduct(product.Id)">Видалити</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ProductDto>? ProductList;
+
+    [Inject] private HttpClient Http { get; set; } = default!;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProductList = await Http.GetFromJsonAsync<List<ProductDto>>("api/products");
+    }
+
+    private void EditProduct(int id)
+    {
+        Navigation.NavigateTo($"/edit-product/{id}");
+    }
+
+    private async Task DeleteProduct(int id)
+    {
+        var response = await Http.DeleteAsync($"api/products/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            ProductList = ProductList?.Where(p => p.Id != id).ToList();
+        }
+    }
+}

@@ -1,0 +1,35 @@
+﻿@page "/edit-product/{id:int}"
+
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h3>Редагувати товар</h3>
+
+@if (Product == null)
+{
+    <p>Oops, something went wrong....</p>
+}
+else
+{
+    <EditForm Model="Product" OnValidSubmit="UpdateProduct">
+        <DataAnnotationsValidator />
+
+        <div>
+            <label>Назва:</label>
+            <InputText @bind-Value="Product.Name" />
+        </div>
+
+        <div>
+            <label>Опис:</label>
+            <InputTextArea @bind-Value="Product.Description" />
+        </div>
+
+        <div>
+            <label>Ціна:</label>
+            <InputNumber @bind-Value="Product.Price" />
+        </div>
+
+        <button type="submit">Зберегти</button>
+        <button type="button" @onclick="Cancel">Скасувати</button>
+    </EditForm>
+}

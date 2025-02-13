@@ -1,0 +1,16 @@
+<nav class="nav-menu">
+    <a class="navbar-brand" href="@BrandUrl">@BrandName</a>
+    <div class="menu-items">
+        @foreach (var item in MenuItems)
+        {
+            <a href="@item.Url" class="nav-link">
+                <i class="@item.IconClass"></i> @item.Text
+            </a>
+        }
+
+        @if (IsAuthenticated)
+        {
+            <a href="#" class="nav-link logout" @onclick="LogoutAsync">Вихід</a>
+        }
+    </div>
+</nav>

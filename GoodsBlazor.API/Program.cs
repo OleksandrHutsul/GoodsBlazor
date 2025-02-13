@@ -13,6 +13,16 @@ try
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
 
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+    });
+
     var app = builder.Build();
 
     var scope = app.Services.CreateScope();
@@ -31,6 +41,8 @@ try
     }
 
     app.UseHttpsRedirection();
+
+    app.UseCors();
 
     app.UseAuthorization();
 

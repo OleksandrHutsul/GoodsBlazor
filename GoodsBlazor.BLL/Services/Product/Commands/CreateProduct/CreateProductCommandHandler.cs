@@ -11,8 +11,12 @@ public class CreateProductCommandHandler(IMapper mapper,
     {
         var product = mapper.Map<GoodsBlazor.DAL.Entities.Product>(request);
 
-        int id = await productRepository.Create(product);
+        if (!string.IsNullOrEmpty(request.ImageBase64))
+        {
+            product.ImageData = Convert.FromBase64String(request.ImageBase64);
+        }
 
+        int id = await productRepository.Create(product);
         return id;
     }
 }

@@ -1,0 +1,24 @@
+﻿@page "/create-product"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@using GoodsBlazor.Common.Components.ImageUploader
+
+<h3>Створення товару</h3>
+
+<div class="product-form">
+    <label for="name">Назва:</label>
+    <input id="name" @bind="Product.Name" class="form-control" />
+
+    <label for="description">Опис:</label>
+    <textarea id="description" @bind="Product.Description" class="form-control"></textarea>
+
+    <label for="price">Ціна:</label>
+    <input id="price" type="number" step="0.01" @bind="Product.Price" class="form-control" />
+
+    <ImageUploaderComponent Product="Product" />
+
+    <div class="button-group">
+        <button @onclick="AdminCreateProduct" class="btn btn-primary">Створити</button>
+        <button @onclick="Cancel" class="btn btn-secondary">Скасувати</button>
+    </div>
+</div>

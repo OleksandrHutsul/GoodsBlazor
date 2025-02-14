@@ -1,35 +1,31 @@
-﻿@page "/edit-product/{id:int}"
-
+﻿@page "/edit-product/{Id:int}"
 @inject HttpClient Http
 @inject NavigationManager Navigation
+@using GoodsBlazor.Common.Components.ImageUploader
 
-<h3>Редагувати товар</h3>
+<h3>Редагування товару</h3>
 
-@if (Product == null)
+@if (Product != null)
 {
-    <p>Oops, something went wrong....</p>
+    <div class="product-form">
+        <label for="name">Назва:</label>
+        <input id="name" @bind="Product.Name" class="form-control" />
+
+        <label for="description">Опис:</label>
+        <textarea id="description" @bind="Product.Description" class="form-control"></textarea>
+
+        <label for="price">Ціна:</label>
+        <input id="price" type="number" step="0.01" @bind="Product.Price" class="form-control" />
+
+        <ImageUploaderComponent Product="Product" />
+
+        <div class="button-group">
+            <button @onclick="SaveChanges" class="btn btn-primary">Зберегти</button>
+            <button @onclick="Cancel" class="btn btn-secondary">Скасувати</button>
+        </div>
+    </div>
 }
 else
 {
-    <EditForm Model="Product" OnValidSubmit="UpdateProduct">
-        <DataAnnotationsValidator />
-
-        <div>
-            <label>Назва:</label>
-            <InputText @bind-Value="Product.Name" />
-        </div>
-
-        <div>
-            <label>Опис:</label>
-            <InputTextArea @bind-Value="Product.Description" />
-        </div>
-
-        <div>
-            <label>Ціна:</label>
-            <InputNumber @bind-Value="Product.Price" />
-        </div>
-
-        <button type="submit">Зберегти</button>
-        <button type="button" @onclick="Cancel">Скасувати</button>
-    </EditForm>
+    <p>Oops, something went wrong...</p>
 }

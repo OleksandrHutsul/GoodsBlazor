@@ -13,10 +13,19 @@ public class UpdateProductCommandHandler(IProductRepository productRepository,
         var product = await productRepository.GetByIdAsync(request.Id);
         if (product is null)
         {
-            throw new NotFoundException(nameof(GoodsBlazor.DAL.Entities.Product), request.Id.ToString());
+            throw new NotFoundException(nameof(Product), request.Id.ToString());
         }
 
         mapper.Map(request, product);
+
+        if (!string.IsNullOrEmpty(request.ImageBase64))
+        {
+            product.ImageData = Convert.FromBase64String(request.ImageBase64);
+        }
+        else
+        {
+            product.ImageData = null;
+        }
 
         await productRepository.SaveChanges();
     }

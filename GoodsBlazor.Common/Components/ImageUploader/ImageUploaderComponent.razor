@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+<div class="image-uploader">
+    @if (!string.IsNullOrEmpty(PreviewImageUrl))
+    {
+        <img src="@PreviewImageUrl" alt="Product Image" class="image-preview" />
+        <button @onclick="ClearImage" class="clear-image-btn">×</button>
+    }
+    else
+    {
+        <p>Зображення не завантажено</p>
+    }
+
+    <InputFile OnChange="OnImageSelected" accept="image/png, image/jpeg" />
+</div>

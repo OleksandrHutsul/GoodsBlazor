@@ -1,4 +1,4 @@
-﻿using GoodsBlazor.BLL.Services.Product.Dtos;
+﻿using GoodsBlazor.Shared.Dtos;
 using MediatR;
 
 namespace GoodsBlazor.BLL.Services.Product.Queries.GetProductById;

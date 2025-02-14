@@ -6,30 +6,32 @@ namespace GoodsBlazor.Admin.Pages;
 
 public partial class EditProduct
 {
-    [Parameter] public int Id { get; set; }
+    [Parameter] public int? Id { get; set; }
     private ProductDto? Product { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == null)
+        {
+            Navigation.NavigateTo("/products");
+            return;
+        }
+
         Product = await Http.GetFromJsonAsync<ProductDto>($"api/products/{Id}");
     }
 
-    private async Task UpdateProduct()
+    private async Task SaveChanges()
     {
-        var response = await Http.PatchAsJsonAsync($"api/products/{Id}", Product);
-
-        if (response.IsSuccessStatusCode)
+        if (Product != null)
         {
-            Navigation.NavigateTo("/");
-        }
-        else
-        {
-            Console.WriteLine($"Помилка оновлення: {response.StatusCode}");
+            Console.WriteLine($"ImageBase64 Length: {Product.ImageBase64?.Length}");
+            await Http.PatchAsJsonAsync($"api/products/{Id}", Product);
+            Navigation.NavigateTo("/products");
         }
     }
 
     private void Cancel()
     {
-        Navigation.NavigateTo("/");
+        Navigation.NavigateTo("/products");
     }
 }

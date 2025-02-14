@@ -1,0 +1,45 @@
+﻿.image-uploader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.image-preview {
+    width: 120px;
+    height: 120px; 
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    position: relative;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.clear-image-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 2px 5px; 
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 10px; 
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+    .clear-image-btn:hover {
+        background: darkred;
+    }

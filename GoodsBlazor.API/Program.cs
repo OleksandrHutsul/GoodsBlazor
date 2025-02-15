@@ -3,11 +3,27 @@ using GoodsBlazor.API.Middleware;
 using GoodsBlazor.BLL.Extensions;
 using GoodsBlazor.DAL.Extensions;
 using GoodsBlazor.DAL.Seeders;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "AuthCookie";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; 
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.LoginPath = "/api/cookie/login";
+        options.AccessDeniedPath = "/api/cookie/access-denied";
+    });
+
+
+    builder.Services.AddAuthorization();
+
 
     builder.AddPresentation();
     builder.Services.AddApplication();

@@ -1,0 +1,47 @@
+﻿@page "/products"
+@using GoodsBlazor.BLL.Services.Product.Queries.GetAllProducts
+@using GoodsBlazor.BLL.Services.CartItemRepository.Commands.AddToCart
+@using GoodsBlazor.Client.Services
+@using GoodsBlazor.Shared.Dtos
+@using MediatR
+@inject IMediator Mediator
+@inject UserService UserService
+
+<h3>Список товарів</h3>
+
+@if (products is null)
+{
+    <p>Завантаження...</p>
+}
+else if (products.Count == 0)
+{
+    <p>Товари відсутні</p>
+}
+else
+{
+    <div class="product-list">
+        @foreach (var product in products)
+        {
+            <div class="product-card">
+                <div class="product-image">
+                    @if (!string.IsNullOrEmpty(product.ImageBase64))
+                    {
+                        <img src="data:image/png;base64,@product.ImageBase64" alt="@product.Name" />
+                    }
+                    else
+                    {
+                        <div class="no-image">None</div>
+                    }
+                </div>
+                <div class="product-info">
+                    <h4>@product.Name</h4>
+                    <p>@product.Description</p>
+                    <p class="product-price">@product.Price.ToString("C")</p>
+                </div>
+                <div class="product-actions">
+                    <button class="btn btn-success" @onclick="() => AddToCart(product.Id)">Додати в кошик</button>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -7,4 +7,5 @@ public interface IUserRepository
     public Task<int> Create(User entity);
     public Task<User?> GetByEmailAsync(string email);
     public Task<User?> GetByIdAsync(int id);
+    public Task<User?> GetUserByEmailAsync(string email);
 }

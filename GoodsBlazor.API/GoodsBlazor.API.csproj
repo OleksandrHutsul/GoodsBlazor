@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GoodsBlazor.BLL\GoodsBlazor.BLL.csproj" />
+    <ProjectReference Include="..\GoodsBlazor.Common\GoodsBlazor.Common.csproj" />
     <ProjectReference Include="..\GoodsBlazor.Shared\GoodsBlazor.Shared.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,46 @@
+﻿@page "/cart"
+@using GoodsBlazor.BLL.Services.CartItemRepository.Dtos
+@using GoodsBlazor.BLL.Services.CartItemRepository.Queries.GetUserCart
+@using GoodsBlazor.BLL.Services.CartItemRepository.Commands.AddToCart
+@using GoodsBlazor.BLL.Services.CartItemRepository.Commands.RemoveFromCart
+@using GoodsBlazor.Client.Services
+@using MediatR
+@inject IMediator Mediator
+@inject UserService UserService
+
+<PageTitle>Кошик</PageTitle>
+
+<h2>Ваш кошик</h2>
+
+@if (cartItems is null)
+{
+    <p>Завантаження...</p>
+}
+else if (!cartItems.Any())
+{
+    <p>Кошик порожній.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Назва товару</th>
+                <th>Ціна</th>
+                <th>Дія</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cartItems)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => RemoveFromCart(item.ProductId)">Видалити</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

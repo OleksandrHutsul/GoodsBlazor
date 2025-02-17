@@ -1,6 +1,7 @@
 ﻿<div class="image-uploader">
     @if (!string.IsNullOrEmpty(PreviewImageUrl))
     {
+        <p>Blob URL: <a href="@PreviewImageUrl" target="_blank">@PreviewImageUrl</a></p> 
         <img src="@PreviewImageUrl" alt="Product Image" class="image-preview" />
         <button @onclick="ClearImage" class="clear-image-btn">×</button>
     }

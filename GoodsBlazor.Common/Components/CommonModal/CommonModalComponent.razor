@@ -1,0 +1,9 @@
+@if (IsOpen)
+{
+    <div class="modal-backdrop" @onclick="CloseModal">
+        <div class="modal-content" @onclick:stopPropagation>
+            <p class="modal-message">@Message</p>
+            <button class="modal-button" @onclick="CloseModal">Close</button>
+        </div>
+    </div>
+}

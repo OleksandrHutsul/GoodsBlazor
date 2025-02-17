@@ -1,0 +1,12 @@
+﻿@page "/new"
+@using GoodsBlazor.Common.Components.CommonModal
+
+<div class="container">
+    <h3>Test Image Upload</h3>
+    <div class="image-wrapper">
+        <img id="largeImage" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg"
+             class="responsive-image" @onload="ImageLoaded" />
+    </div>
+
+    <CommonModalComponent @bind-IsOpen="isModalOpen" Message="Image successfully uploaded!" />
+</div>

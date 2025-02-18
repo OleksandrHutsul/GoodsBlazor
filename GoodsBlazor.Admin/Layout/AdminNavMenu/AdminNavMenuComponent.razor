@@ -5,12 +5,12 @@
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 
-<NavMenuComponent BrandName="GoodsBlazor.Admin" BrandUrl="/" MenuItems="AdminMenuItems" />
+<NavMenuComponent BrandName="Admin Page" BrandUrl="/" MenuItems="AdminMenuItems" />
 
 @code {
     private List<NavMenuItem> AdminMenuItems = new()
     {
-        new() { Text = "Goods", Url = "/products", IconClass = "bi bi-box-seam" },
+        new() { Text = "Goods", Url = "/products", IconClass = "fa-solid fa-house" },
         new() { Text = "Create Product", Url = "/create-product", IconClass = "bi bi-box-seam" },
         new() { Text = "New task", Url = "/new", IconClass = "bi bi-box-seam" },
         new() { Text = "Index", Url = "/index", IconClass = "bi bi-box-seam" }

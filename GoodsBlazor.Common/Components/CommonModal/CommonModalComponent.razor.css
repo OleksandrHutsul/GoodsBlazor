@@ -64,3 +64,18 @@
         transform: scale(1);
     }
 }
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+.close-btn {
+    background: gray;
+}
+
+.close-btn:hover {
+    background: darkgray;
+}

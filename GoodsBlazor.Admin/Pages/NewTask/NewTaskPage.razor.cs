@@ -1,6 +1,6 @@
-﻿namespace GoodsBlazor.Admin.Pages;
+﻿namespace GoodsBlazor.Admin.Pages.NewTask;
 
-public partial class NewTask
+public partial class NewTaskPage
 {
     private bool isModalOpen;
 

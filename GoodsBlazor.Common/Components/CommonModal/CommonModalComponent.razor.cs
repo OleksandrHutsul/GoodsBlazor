@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace GoodsBlazor.Common.Components.CommonModal;
 
@@ -13,20 +14,29 @@ public partial class CommonModalComponent
         set
         {
             if (_isOpen == value) return;
-
             _isOpen = value;
             IsOpenChanged.InvokeAsync(value);
-            
         }
     }
 
-    [Parameter, EditorRequired]
-    public required string Message { get; set; }
-
+    [Parameter] public string? ImageUrl { get; set; }
     [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
+    [Parameter] public EventCallback DeleteImageCallback { get; set; } 
 
-    private async Task CloseModal()
+    [Inject] private IJSRuntime JS { get; set; } = default!;
+
+    private async Task CloseModal() => IsOpen = false;
+
+    private async Task OpenInNewTab()
     {
-        IsOpen = false;
+        if (!string.IsNullOrEmpty(ImageUrl))
+            await JS.InvokeVoidAsync("window.open", ImageUrl, "_blank");
+        
+    }
+
+    private async Task DeleteImage()
+    {
+        await DeleteImageCallback.InvokeAsync(); 
+        CloseModal();
     }
 }

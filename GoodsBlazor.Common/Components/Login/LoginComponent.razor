@@ -3,11 +3,11 @@
 @inject AuthService AuthService
 @inject NavigationManager Navigation
 
-<PageTitle>Авторизація</PageTitle>
+<PageTitle>Login</PageTitle>
 
 <div class="login-container">
     <div class="login-box">
-        <h2>Авторизація</h2>
+        <h2>Login</h2>
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {
@@ -15,19 +15,17 @@
         }
 
         <div class="form-group">
-            <label>Email:</label>
-            <input @bind="email" type="email" class="form-control" />
+            <input @bind="email" type="email" class="form-control" placeholder="Email" />
         </div>
 
         <div class="form-group">
-            <label>Пароль:</label>
-            <input @bind="password" type="password" class="form-control" />
+            <input @bind="password" type="password" class="form-control" placeholder="Password" />
         </div>
 
-        <button @onclick="Login" class="btn-login">Увійти</button>
+        <button @onclick="Login" class="btn-login">Login</button>
 
         <p class="register-link">
-            Ще не маєте акаунта? <a href="/register">Зареєструватися</a>
+            Don't have an account yet? <a href="/register">Register</a>
         </p>
     </div>
 </div>

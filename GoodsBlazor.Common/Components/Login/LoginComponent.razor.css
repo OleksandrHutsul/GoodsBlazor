@@ -4,6 +4,7 @@
     align-items: center;
     height: 100vh;
     background-color: #f3f4f6;
+    padding: 10px; 
 }
 
 .login-box {
@@ -13,39 +14,87 @@
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; 
+    text-align: center;
 }
 
-    .login-box h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
-    }
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
 
-    .login-box label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
+.login-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
 
-    .login-box input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-    }
+.login-box input {
+    width: 100%;
+    padding: 8px;  
+    margin-bottom: 7px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px; 
+}
 
-    .login-box button {
-        width: 100%;
-        background: #2563eb;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+.login-box input:focus {
+    border-color: #2563eb;  
+    outline: none;  
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.5);  
+}
 
-        .login-box button:hover {
-            background: #1d4ed8;
-        }
+.login-box button {
+    width: auto;
+    padding: 8px 20px;  
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;  
+    margin-top: 10px;
+}
+
+.login-box button {
+    width: auto;
+    padding: 10px 20px; 
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 5px; 
+}
+
+.login-box button:hover {
+    background: #1d4ed8;
+}
+
+.login-box .form-group {
+    margin-bottom: 7px;
+}
+
+.login-box .register-link {
+    text-align: center;
+    margin-top: 7px;
+    font-size: 14px;
+}
+
+.login-box .register-link a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.login-box .register-link a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+}

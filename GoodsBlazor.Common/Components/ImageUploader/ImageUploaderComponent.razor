@@ -1,14 +1,25 @@
-﻿<div class="image-uploader">
+﻿@using GoodsBlazor.Common.Components.CommonModal
+
+<CommonModalComponent IsOpen="@IsModalOpen"
+                      ImageUrl="@PreviewImageUrl"
+                      DeleteImageCallback="@ClearImage"
+                      IsOpenChanged="@EventCallback.Factory.Create(this, (bool v) => IsModalOpen = v)" />
+
+<div class="image-uploader">
     @if (!string.IsNullOrEmpty(PreviewImageUrl))
     {
-        <p>Blob URL: <a href="@PreviewImageUrl" target="_blank">@PreviewImageUrl</a></p> 
+        @if (PreviewImageUrl.StartsWith("blob:"))
+        {
+            <p>Blob URL: <a href="@PreviewImageUrl" target="_blank">Open Image</a></p>
+        }
         <img src="@PreviewImageUrl" alt="Product Image" class="image-preview" />
         <button @onclick="ClearImage" class="clear-image-btn">×</button>
     }
     else
     {
-        <p>Зображення не завантажено</p>
+        <p>Image not loaded!</p>
     }
 
-    <button class="upload-btn" @onclick="OpenFilePicker">Завантажити зображення</button>
+    <button class="upload-btn" @onclick="OpenFilePicker">Uploading image</button>
 </div>
+

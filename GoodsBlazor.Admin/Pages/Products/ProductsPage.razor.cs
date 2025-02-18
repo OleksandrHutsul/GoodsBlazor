@@ -1,9 +1,9 @@
 ﻿using GoodsBlazor.Shared.Dtos;
 using System.Net.Http.Json;
 
-namespace GoodsBlazor.Admin.Pages;
+namespace GoodsBlazor.Admin.Pages.Products;
 
-public partial class Products
+public partial class ProductsPage
 {
     private List<ProductDto>? ProductList;
 

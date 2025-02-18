@@ -2,8 +2,13 @@
 {
     <div class="modal-backdrop" @onclick="CloseModal">
         <div class="modal-content" @onclick:stopPropagation>
-            <p class="modal-message">@Message</p>
-            <button class="modal-button" @onclick="CloseModal">Close</button>
+            <p class="modal-message">What to do with the image?</p>
+
+            <div class="modal-actions">
+                <button class="modal-button" @onclick="OpenInNewTab">Open</button>
+                <button class="modal-button delete-btn" @onclick="DeleteImage">Delete</button>
+                <button class="modal-button close-btn" @onclick="CloseModal">Close</button>
+            </div>
         </div>
     </div>
 }

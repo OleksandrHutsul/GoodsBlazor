@@ -11,7 +11,7 @@ public partial class LoginComponent
         var success = await AuthService.LoginAsync(email, password);
         if (success)
         {
-            Navigation.NavigateTo("/", true);
+            Navigation.NavigateTo("/products", true);
         }
         else
         {

@@ -1,9 +1,9 @@
 ﻿using GoodsBlazor.Shared.Dtos;
 using System.Net.Http.Json;
 
-namespace GoodsBlazor.Admin.Pages;
+namespace GoodsBlazor.Admin.Pages.CreateProduct;
 
-public partial class CreateProduct
+public partial class CreateProductPage
 {
     private ProductDto Product { get; set; } = new();
 

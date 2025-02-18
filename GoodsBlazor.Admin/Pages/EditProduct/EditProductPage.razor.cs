@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
-namespace GoodsBlazor.Admin.Pages;
+namespace GoodsBlazor.Admin.Pages.EditProduct;
 
-public partial class EditProduct
+public partial class EditProductPage
 {
     [Parameter] public int? Id { get; set; }
     private ProductDto? Product { get; set; }

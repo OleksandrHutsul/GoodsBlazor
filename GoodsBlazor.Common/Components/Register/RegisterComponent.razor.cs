@@ -1,7 +1,7 @@
-﻿using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using GoodsBlazor.DAL.Entities;
 using GoodsBlazor.Common.Components.Models;
+using GoodsBlazor.Common.Services.Interfaces;
 
 namespace GoodsBlazor.Common.Components.Register;
 
@@ -9,58 +9,57 @@ public partial class RegisterComponent
 {
     [Parameter] public Role Role { get; set; } = Role.User;
 
-    private string email = "";
-    private string password = "";
-    private string? errorMessage;
-    private string? successMessage;
-    private bool isLoading = false;
-
-    [Inject] private HttpClient Http { get; set; } = default!;
-    [Inject] private NavigationManager Navigation { get; set; } = default!;
+    [Inject] public required IUserService UserService { get; set; }
+    [Inject] public required NavigationManager NavigationManager { get; set; }
+    
+    private string _email = "";
+    private string _password = "";
+    private string? _errorMessage;
+    private string? _successMessage;
+    private bool _isLoading = false;    
 
     private async Task Register()
     {
-        errorMessage = null;
-        successMessage = null;
+        _errorMessage = null;
+        _successMessage = null;
 
-        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+        if (string.IsNullOrWhiteSpace(_email) || string.IsNullOrWhiteSpace(_password))
         {
-            errorMessage = "Усі поля повинні бути заповнені.";
+            _errorMessage = "All fields must be filled in.";
             return;
         }
 
-        isLoading = true;
+        _isLoading = true;
 
         try
         {
             var request = new RegisterRequest
             {
-                Email = email,
-                Password = password,
+                Email = _email,
+                Password = _password,
                 Role = Role
             };
 
-            var response = await Http.PostAsJsonAsync("api/users", request);
+            var (isSuccess, error) = await UserService.RegisterUserAsync(request);
 
-            if (response.IsSuccessStatusCode)
+            if (isSuccess)
             {
-                successMessage = "Реєстрація успішна! Ви можете увійти.";
-                email = "";
-                password = "";
+                _successMessage = "Registration successful! You can log in.";
+                _email = "";
+                _password = "";
             }
             else
             {
-                var errorResponse = await response.Content.ReadAsStringAsync();
-                errorMessage = $"Помилка: {errorResponse}";
+                _errorMessage = error;
             }
         }
         catch (Exception ex)
         {
-            errorMessage = $"Помилка: {ex.Message}";
+            _errorMessage = $"Error: {ex.Message}";
         }
         finally
         {
-            isLoading = false;
+            _isLoading = false;
         }
     }
 }

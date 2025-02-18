@@ -8,27 +8,27 @@ namespace GoodsBlazor.Common.Components.NavMenu;
 
 public partial class NavMenuComponent
 {
-    [Inject] private AuthenticationStateProvider AuthStateProvider { get; set; } = default!;
-    [Inject] private CustomAuthStateProvider CustomAuthStateProvider { get; set; } = default!;
-    [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
-    [Inject] private NavigationManager Navigation { get; set; } = default!;
+    [Inject] public required AuthenticationStateProvider AuthStateProvider { get; set; }
+    [Inject] public required CustomAuthStateProvider CustomAuthStateProvider { get; set; }
+    [Inject] public required IJSRuntime JSRuntime { get; set; }
+    [Inject] public required NavigationManager NavigationManager { get; set; }
 
     [Parameter] public string BrandName { get; set; } = "Brand";
     [Parameter] public string BrandUrl { get; set; } = "/";
     [Parameter] public List<NavMenuItem> MenuItems { get; set; } = new();
 
-    private bool IsAuthenticated { get; set; }
+    private bool _isAuthenticated { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthStateProvider.GetAuthenticationStateAsync();
-        IsAuthenticated = authState.User.Identity?.IsAuthenticated == true;
+        _isAuthenticated = authState.User.Identity?.IsAuthenticated == true;
     }
 
     private async Task LogoutAsync()
     {
         await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "accessToken");
         await CustomAuthStateProvider.NotifyUserLogout();
-        Navigation.NavigateTo("/", forceLoad: true);
+        NavigationManager.NavigateTo("/", forceLoad: true);
     }
 }

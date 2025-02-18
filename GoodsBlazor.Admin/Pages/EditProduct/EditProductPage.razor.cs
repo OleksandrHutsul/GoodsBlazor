@@ -1,37 +1,38 @@
 ﻿using GoodsBlazor.Shared.Dtos;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http.Json;
+using GoodsBlazor.Admin.Services.Interfaces;
 
 namespace GoodsBlazor.Admin.Pages.EditProduct;
 
 public partial class EditProductPage
 {
     [Parameter] public int? Id { get; set; }
-    private ProductDto? Product { get; set; }
+
+    [Inject] public required IProductService productService { get; set; }
+    [Inject] public required NavigationManager NavigationManager { get; set; }
+
+    private ProductDto? _product;
 
     protected override async Task OnInitializedAsync()
     {
-        if (Id == null)
+        if (Id is null)
         {
-            Navigation.NavigateTo("/products");
+            BackToProductPage();
             return;
         }
 
-        Product = await Http.GetFromJsonAsync<ProductDto>($"api/products/{Id}");
+        _product = await productService.GetProductByIdAsync(Id.Value);
     }
 
-    private async Task SaveChanges()
+    private async Task SaveChangesAsync()
     {
-        if (Product != null)
-        {
-            Console.WriteLine($"ImageBase64 Length: {Product.ImageBase64?.Length}");
-            await Http.PatchAsJsonAsync($"api/products/{Id}", Product);
-            Navigation.NavigateTo("/products");
-        }
+        if (_product is null)
+            return;
+        
+        Console.WriteLine($"ImageBase64 Length: {_product.ImageBase64?.Length}");
+        await productService.UpdateProductAsync(Id.Value, _product);
+        BackToProductPage();
     }
 
-    private void Cancel()
-    {
-        Navigation.NavigateTo("/products");
-    }
+    private void BackToProductPage() => NavigationManager.NavigateTo("/products");
 }

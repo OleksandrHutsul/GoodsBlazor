@@ -8,9 +8,9 @@
             </a>
         }
 
-        @if (IsAuthenticated)
+        @if (_isAuthenticated)
         {
-            <a href="#" class="nav-link logout" @onclick="LogoutAsync">Вихід</a>
+            <a href="#" class="nav-link logout" @onclick="LogoutAsync">Exit</a>
         }
     </div>
 </nav>

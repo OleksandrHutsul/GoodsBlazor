@@ -1,17 +1,17 @@
 @using GoodsBlazor.Shared.Dtos
 
-<h3>Список товарів</h3>
+<title>Products</title>
 
 @if (Products is null || Products.Count == 0)
 {
-    <p>Товари відсутні</p>
+    <p>Products are missing</p>
 }
 else
 {
     <div class="product-list">
         @foreach (var product in Products)
         {
-            <div class="product-card">
+            <div class="product-card" @onclick="() => ShowProductDetails(product)">
                 <div class="product-image">
                     @if (!string.IsNullOrEmpty(product.ImageBase64))
                     {
@@ -24,21 +24,56 @@ else
                 </div>
                 <div class="product-info">
                     <h4>@product.Name</h4>
-                    <p>@product.Description</p>
+                    <p>
+                        @(product.Description.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)
+                    </p>
                     <p class="product-price">@product.Price.ToString("C")</p>
                 </div>
                 <div class="product-actions">
                     @if (IsAdmin)
                     {
-                        <button class="btn btn-warning" @onclick="() => OnEdit.InvokeAsync(product.Id)">Редагувати</button>
-                        <button class="btn btn-danger" @onclick="() => DeleteProduct(product.Id)">Видалити</button>
+                        <button class="btn edit-btn" @onclick:stopPropagation="true" @onclick="() => OnEdit.InvokeAsync(product.Id)">Edit</button>
+                        <button class="btn delete-btn" @onclick:stopPropagation="true" @onclick="() => DeleteProduct(product.Id)">Delete</button>
                     }
                     else
                     {
-                        <button class="btn btn-success" @onclick="() => OnAddToCart.InvokeAsync(product.Id)">Додати в кошик</button>
+                        <button class="btn add-btn" @onclick:stopPropagation="true" @onclick="() => OnAddToCart.InvokeAsync(product.Id)">Add</button>
                     }
                 </div>
             </div>
         }
+    </div>
+}
+
+@if (SelectedProduct != null)
+{
+    <div class="modal-overlay" @onclick="CloseModal">
+        <div class="modal-content" @onclick:stopPropagation="true">
+            <span class="modal-close" @onclick="CloseModal">&times;</span>
+            <h2 class="modal-text">@SelectedProduct.Name</h2>
+            <div class="modal-image">
+                @if (!string.IsNullOrEmpty(SelectedProduct.ImageBase64))
+                {
+                    <img src="data:image/png;base64,@SelectedProduct.ImageBase64" alt="@SelectedProduct.Name" />
+                }
+                else
+                {
+                    <div class="no-image">None</div>
+                }
+            </div>
+            <p class="modal-text">@SelectedProduct.Description</p>
+            <p class="modal-text product-price">@SelectedProduct.Price.ToString("C")</p>
+            <div class="modal-actions">
+                @if (IsAdmin)
+                {
+                    <button class="btn edit-btn" @onclick="() => OnEdit.InvokeAsync(SelectedProduct.Id)">Edit</button>
+                    <button class="btn delete-btn" @onclick="() => DeleteProduct(SelectedProduct.Id)">Delete</button>
+                }
+                else
+                {
+                    <button class="btn add-btn" @onclick="() => OnAddToCart.InvokeAsync(SelectedProduct.Id)">Add</button>
+                }
+            </div>
+        </div>
     </div>
 }

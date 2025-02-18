@@ -1,21 +1,23 @@
-﻿namespace GoodsBlazor.Common.Components.Login;
+﻿using GoodsBlazor.Common.Services.Interfaces;
+using Microsoft.AspNetCore.Components;
+
+namespace GoodsBlazor.Common.Components.Login;
 
 public partial class LoginComponent
 {
-    private string email = "";
-    private string password = "";
-    private string? errorMessage;
+    [Inject] public required IUserService UserService { get; set; }
+    [Inject] public required NavigationManager NavigationManager { get; set; }
+
+    private string _email = "";
+    private string _password = "";
+    private string? _errorMessage;
 
     private async Task Login()
     {
-        var success = await AuthService.LoginAsync(email, password);
+        var success = await UserService.LoginAsync(_email, _password);
         if (success)
-        {
-            Navigation.NavigateTo("/products", true);
-        }
+            NavigationManager.NavigateTo("/products");
         else
-        {
-            errorMessage = "Невірний email або пароль";
-        }
+            _errorMessage = "Incorrect email or password";
     }
 }

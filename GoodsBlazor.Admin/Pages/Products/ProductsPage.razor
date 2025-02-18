@@ -1,8 +1,6 @@
 ﻿@page "/products"
 @using GoodsBlazor.Shared.Dtos
 @using GoodsBlazor.Common.Components.ProductList
-@inject HttpClient Http
-@inject NavigationManager Navigation
 
 <ProductListComponents Products="ProductList" IsAdmin="true"
                        OnEdit="EditProduct" OnDelete="DeleteProduct" />

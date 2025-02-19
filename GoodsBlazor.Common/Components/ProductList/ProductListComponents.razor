@@ -24,10 +24,9 @@ else
                 </div>
                 <div class="product-info">
                     <h4>@product.Name</h4>
-                    <p>
-                        @(product.Description.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)
-                    </p>
+                    <p>@(product.Description.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)</p>
                     <p class="product-price">@product.Price.ToString("C")</p>
+                    <p class="product-type">Category: @product.ProductTypeName</p> 
                 </div>
                 <div class="product-actions">
                     @if (IsAdmin)
@@ -63,6 +62,7 @@ else
             </div>
             <p class="modal-text">@SelectedProduct.Description</p>
             <p class="modal-text product-price">@SelectedProduct.Price.ToString("C")</p>
+            <p class="modal-text product-type">Category: @SelectedProduct.ProductTypeName</p>
             <div class="modal-actions">
                 @if (IsAdmin)
                 {

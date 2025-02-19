@@ -1,0 +1,13 @@
+@typeparam T
+
+<div class="custom-select" @onclick="ToggleDropdown">
+    <div class="selected-value">@GetDisplayValue(_selectedItem)</div>
+    <div class="dropdown" style="@(_isOpened ? "display:block;" : "display:none;")">
+        @foreach (var item in Options)
+        {
+            <div class="dropdown-item" @onclick="() => SelectItem(item)">
+                @GetDisplayValue(item)
+            </div>
+        }
+    </div>
+</div>

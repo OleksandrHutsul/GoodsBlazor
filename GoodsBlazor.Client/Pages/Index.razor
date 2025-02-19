@@ -42,7 +42,7 @@
         var success = await AuthService.LoginAsync(email, password);
         if (success)
         {
-            Navigation.NavigateTo("/");
+            Navigation.NavigateTo("/products");
         }
         else
         {

@@ -1,0 +1,46 @@
+﻿.custom-select {
+    position: relative;
+    width: 220px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    background: white;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.custom-select:hover {
+    border-color: #007bff;
+    box-shadow: 0px 3px 8px rgba(0, 123, 255, 0.2);
+}
+
+.selected-value {
+    padding: 8px;
+}
+
+.dropdown {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 200px; 
+    overflow-y: auto; 
+}
+
+.dropdown-item {
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+    background: #007bff;
+    color: white;
+}

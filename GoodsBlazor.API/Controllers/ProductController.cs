@@ -1,10 +1,11 @@
 ﻿using GoodsBlazor.BLL.Services.Product.Commands.CreateProduct;
 using GoodsBlazor.BLL.Services.Product.Commands.Delete;
 using GoodsBlazor.BLL.Services.Product.Commands.Update;
-using GoodsBlazor.BLL.Services.Product.Dtos;
 using GoodsBlazor.BLL.Services.Product.Queries.GetAllProducts;
 using GoodsBlazor.BLL.Services.Product.Queries.GetProductById;
+using GoodsBlazor.BLL.Services.ProductType.Commands.Queries;
 using GoodsBlazor.DAL.Entities;
+using GoodsBlazor.Shared.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,14 @@ public class ProductController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<IEnumerable<ProductDto>>> GetAll()
     {
         var products = await mediator.Send(new GetAllProductsQuery()); 
+        return Ok(products);
+    }
+
+    [HttpGet("productstype")]
+    [AllowAnonymous]
+    public async Task<ActionResult<IEnumerable<GoodsBlazor.Shared.Dtos.ProductTypeDto>>> GetAllProductType()
+    {
+        var products = await mediator.Send(new GetAllProductsTypeQuery());
         return Ok(products);
     }
 

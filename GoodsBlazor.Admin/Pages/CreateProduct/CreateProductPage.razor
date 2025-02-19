@@ -1,5 +1,7 @@
 ﻿@page "/create-product"
 @using GoodsBlazor.Common.Components.ImageUploader
+@using GoodsBlazor.Shared.Dtos
+@using GoodsBlazor.Common.Components.BCHSelect
 
 <h3>Створення товару</h3>
 
@@ -12,6 +14,11 @@
 
     <label for="price">Price:</label>
     <input id="price" type="number" step="0.01" @bind="_product.Price" class="form-control" />
+
+    <label for="category">Category:</label>
+    <BCHSelectComponent T="ProductTypeDto"
+                        Options="@_productTypes"
+                        SelectedChanged="OnProductTypeSelected" />
 
     <ImageUploaderComponent Product="_product" />
 

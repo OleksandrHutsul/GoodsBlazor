@@ -7,4 +7,7 @@ public class ProductDto
     public string? Description { get; set; }
     public decimal Price { get; set; } = default!;
     public string? ImageBase64 { get; set; }
+
+    public string? ProductTypeName { get; set; }
+    public int ProductTypeId { get; set; }
 }

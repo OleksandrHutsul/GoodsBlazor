@@ -32,7 +32,16 @@ public class ProductRepository(GoodsDbContext dbContext): IProductRepository
     public async Task<Product?> GetByIdAsync(int id)
     {
         var products = await dbContext.Products
+            .Include(p => p.ProductType)
             .FirstOrDefaultAsync(x => x.Id == id);
+        return products;
+    }
+
+    public async Task<IEnumerable<ProductType>> GetAllProductTypeAsync()
+    {
+        var products = await dbContext.ProductsType
+            .ToListAsync();
+
         return products;
     }
 

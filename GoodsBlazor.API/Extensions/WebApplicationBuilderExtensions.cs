@@ -17,7 +17,7 @@ public static class WebApplicationBuilderExtensions
         builder.Services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme; 
+            //options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme; 
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -32,14 +32,14 @@ public static class WebApplicationBuilderExtensions
             ValidAudience = configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
         };
-    })
-    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-    {
-        options.Cookie.HttpOnly = true;
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-        options.Cookie.SameSite = SameSiteMode.None;
-        options.LoginPath = "/";
     });
+    //.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+    //{
+    //    options.Cookie.HttpOnly = true;
+    //    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    //    options.Cookie.SameSite = SameSiteMode.None;
+    //    options.LoginPath = "/";
+    //});
         
         builder.Services.AddAuthorization();
         builder.Services.AddCascadingAuthenticationState();

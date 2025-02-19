@@ -7,4 +7,6 @@ public class Product
     public string? Description { get; set; } 
     public decimal Price { get; set; } = default!;
     public byte[]? ImageData { get; set; } 
+    public int? ProductTypeId { get; set; }
+    public ProductType? ProductType { get; set; }
 }

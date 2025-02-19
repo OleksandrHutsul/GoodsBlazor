@@ -6,14 +6,21 @@ namespace GoodsBlazor.Admin.Pages.CreateProduct;
 
 public partial class CreateProductPage
 {
-    private ProductDto _product = new();
-
     [Inject] public required IProductService ProductService { get; set; }
     [Inject] public required NavigationManager NavigationManager { get; set; }
+    
+    private ProductDto _product = new();
+    private List<ProductTypeDto> _productTypes = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var categories = await ProductService.GetAllProductTypesAsync();
+        _productTypes = categories.ToList();
+    }
 
     private async Task AdminCreateProduct()
     {
-        if (!string.IsNullOrEmpty(_product.Name) && _product.Price > 0)
+        if (!string.IsNullOrEmpty(_product.Name) && _product.Price > 0 && _product.ProductTypeId > 0)
         {
             Console.WriteLine($"ImageBase64 Length: {_product.ImageBase64?.Length}");
             await ProductService.CreateProductAsync(_product);
@@ -26,4 +33,10 @@ public partial class CreateProductPage
     }
 
     private void BackToProductPage() => NavigationManager.NavigateTo("/products");
+
+    private Task OnProductTypeSelected(ProductTypeDto selectedType)
+    {
+        _product.ProductTypeId = selectedType.Id;
+        return Task.CompletedTask;
+    }
 }

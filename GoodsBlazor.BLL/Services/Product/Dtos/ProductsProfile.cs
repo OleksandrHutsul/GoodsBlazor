@@ -10,7 +10,8 @@ public class ProductsProfile : Profile
     {
         CreateMap<GoodsBlazor.DAL.Entities.Product, GoodsBlazor.Shared.Dtos.ProductDto >()
             .ForMember(dest => dest.ImageBase64,
-                opt => opt.MapFrom(src => src.ImageData != null ? Convert.ToBase64String(src.ImageData) : null));
+                opt => opt.MapFrom(src => src.ImageData != null ? Convert.ToBase64String(src.ImageData) : null))
+                .ForMember(dest => dest.ProductTypeName, opt => opt.MapFrom(src => src.ProductType != null ? src.ProductType.TypeName : null));
 
         CreateMap<GoodsBlazor.Shared.Dtos.ProductDto, GoodsBlazor.DAL.Entities.Product>()
             .ForMember(dest => dest.ImageData,

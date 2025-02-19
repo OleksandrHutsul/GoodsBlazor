@@ -26,7 +26,7 @@ try
     //    });
     //});
 
-    builder.Services.AddCors(options =>
+     builder.Services.AddCors(options =>
     {
         options.AddDefaultPolicy(policy =>
         {

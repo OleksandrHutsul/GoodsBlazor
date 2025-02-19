@@ -1,6 +1,4 @@
-﻿using GoodsBlazor.DAL.Entities;
-
-namespace GoodsBlazor.BLL.Services.User.Dtos;
+﻿namespace GoodsBlazor.BLL.Services.User.Dtos;
 
 public class UserDto
 {

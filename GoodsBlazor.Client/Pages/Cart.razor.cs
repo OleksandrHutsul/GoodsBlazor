@@ -17,6 +17,7 @@ public partial class Cart
 
     private async Task LoadCart()
     {
+
         if (userId > 0)
         {
             var items = await Mediator.Send(new GetUserCartQuery { UserId = userId });

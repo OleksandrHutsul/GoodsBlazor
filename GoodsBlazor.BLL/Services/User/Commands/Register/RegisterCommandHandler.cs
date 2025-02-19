@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using GoodsBlazor.BLL.Exceptions;
 using GoodsBlazor.BLL.Interfaces;
-using GoodsBlazor.DAL.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

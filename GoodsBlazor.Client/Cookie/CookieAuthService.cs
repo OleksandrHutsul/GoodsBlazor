@@ -16,12 +16,13 @@ public class CookieAuthService
             Content = JsonContent.Create(new { Email = email, Password = password })
         };
 
-        request.Headers.Add("Cookie", "AuthCookie"); 
+        request.Headers.Add("Accept", "application/json");
 
-        var response = await _httpClient.SendAsync(request);
+        var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
         return response.IsSuccessStatusCode;
     }
+
 
     public async Task LogoutAsync()
     {

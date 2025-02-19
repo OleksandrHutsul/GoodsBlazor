@@ -3,31 +3,28 @@ using GoodsBlazor.API.Middleware;
 using GoodsBlazor.BLL.Extensions;
 using GoodsBlazor.DAL.Extensions;
 using GoodsBlazor.DAL.Seeders;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.Cookie.Name = "AuthCookie";
-        options.Cookie.HttpOnly = true;
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; 
-        options.Cookie.SameSite = SameSiteMode.Strict;
-        options.LoginPath = "/api/cookie/login";
-        options.AccessDeniedPath = "/api/cookie/access-denied";
-    });
-
-
     builder.Services.AddAuthorization();
-
 
     builder.AddPresentation();
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
+
+    //builder.Services.AddCors(options =>
+    //{
+    //    options.AddDefaultPolicy(policy =>
+    //    {
+    //        policy.WithOrigins("https://localhost:7221", "https://localhost:7053")
+    //              .AllowAnyMethod()
+    //              .AllowAnyHeader()
+    //              .AllowCredentials();
+    //    });
+    //});
 
     builder.Services.AddCors(options =>
     {
@@ -60,6 +57,7 @@ try
 
     app.UseCors();
 
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllers();

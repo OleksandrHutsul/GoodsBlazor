@@ -11,9 +11,19 @@ public partial class ProductsPage
     [Inject] public required IProductService ProductService { get; set; }
     [Inject] public required NavigationManager NavigationManager { get; set; }
 
+    public bool _isLoading = true;
+
     protected override async Task OnInitializedAsync()
     {
-        ProductList = await ProductService.GetAllProductsAsync();
+        try
+        {
+            ProductList = await ProductService.GetAllProductsAsync();
+        }
+        finally
+        {
+            _isLoading = false;
+            StateHasChanged();
+        }
     }
 
     private void EditProduct(int id)

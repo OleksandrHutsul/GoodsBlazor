@@ -1,13 +1,26 @@
-@typeparam T
+﻿@typeparam T
 
-<div class="custom-select" @onclick="ToggleDropdown">
-    <div class="selected-value">@GetDisplayValue(_selectedItem)</div>
-    <div class="dropdown" style="@(_isOpened ? "display:block;" : "display:none;")">
-        @foreach (var item in Options)
-        {
-            <div class="dropdown-item" @onclick="() => SelectItem(item)">
-                @GetDisplayValue(item)
-            </div>
-        }
+<div class="custom-select" @onclick:stopPropagation="@true">
+    <div class="selected-value" @onclick="ToggleDropdown">
+        <span>@GetDisplayValue(_selectedItem)</span>
+        <span class="dropdown-arrow @( _isOpened ? "opened" : "" )">
+            <i class="fa-solid fa-caret-down"></i>
+        </span>
     </div>
+    @if (_isOpened)
+    {
+        <div class="dropdown">
+            @foreach (var item in Options)
+            {
+                <div class="dropdown-item" @onclick:stopPropagation="@true" @onclick="() => SelectItem(item)">
+                    @GetDisplayValue(item)
+                </div>
+            }
+        </div>
+    }
 </div>
+
+@if (_isOpened)
+{
+    <div @onclick="CloseDropdown" class="backdrop"></div>
+}

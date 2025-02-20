@@ -19,8 +19,12 @@ public partial class BCHSelectComponent<T>
     {
         _selectedItem = item;
         _isOpened = false;
-        await SelectedChanged.InvokeAsync(_selectedItem); 
-        StateHasChanged();
+        await SelectedChanged.InvokeAsync(_selectedItem);
+    }
+
+    private void CloseDropdown()
+    {
+        _isOpened = false;
     }
 
     private string GetDisplayValue(T? item) => item?.ToString() ?? "Select an option";

@@ -1,6 +1,14 @@
 ﻿@page "/products"
 @using GoodsBlazor.Shared.Dtos
 @using GoodsBlazor.Common.Components.ProductList
+@using GoodsBlazor.Common.Components.LoadingSpinner
 
-<ProductListComponents Products="ProductList" IsAdmin="true"
-                       OnEdit="EditProduct" OnDelete="DeleteProduct" />
+@if (_isLoading)
+{
+    <LoadingSpinnerComponent IsVisible="_isLoading" />
+}
+else
+{
+    <ProductListComponents Products="ProductList" IsAdmin="true"
+                           OnEdit="EditProduct" OnDelete="DeleteProduct" />
+}

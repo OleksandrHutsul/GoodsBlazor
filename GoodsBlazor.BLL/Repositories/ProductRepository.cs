@@ -24,6 +24,7 @@ public class ProductRepository(GoodsDbContext dbContext): IProductRepository
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
         var products = await dbContext.Products
+            .Include(p => p.ProductType)
             .ToListAsync();
 
         return products;

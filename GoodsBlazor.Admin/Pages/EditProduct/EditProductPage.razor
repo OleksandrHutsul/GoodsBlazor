@@ -1,25 +1,32 @@
 ﻿@page "/edit-product/{Id:int}"
 @using GoodsBlazor.Common.Components.ImageUploader
+@using GoodsBlazor.Common.Components.BCHSelect
+@using GoodsBlazor.Shared.Dtos
 
-<h3>Редагування товару</h3>
+<h3>Edit product</h3>
 
 @if (_product != null)
 {
     <div class="product-form">
-        <label for="name">Назва:</label>
+        <label for="name">Name:</label>
         <input id="name" @bind="_product.Name" class="form-control" />
 
-        <label for="description">Опис:</label>
+        <label for="description">Description:</label>
         <textarea id="description" @bind="_product.Description" class="form-control"></textarea>
 
-        <label for="price">Ціна:</label>
+        <label for="price">Price:</label>
         <input id="price" type="number" step="0.01" @bind="_product.Price" class="form-control" />
+
+        <label for="category">Category:</label>
+        <BCHSelectComponent T="ProductTypeDto"
+                            Options="@_productTypes"
+                            SelectedChanged="OnProductTypeSelected" />
 
         <ImageUploaderComponent Product="_product" />
 
         <div class="button-group">
-            <button @onclick="SaveChangesAsync" class="btn btn-primary">Зберегти</button>
-            <button @onclick="BackToProductPage" class="btn btn-secondary">Скасувати</button>
+            <button @onclick="SaveChangesAsync" class="btn btn-primary">Save</button>
+            <button @onclick="BackToProductPage" class="btn btn-secondary">Cancel</button>
         </div>
     </div>
 }

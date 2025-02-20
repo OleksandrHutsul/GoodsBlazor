@@ -17,7 +17,7 @@ public partial class NavMenuComponent
     [Parameter] public string BrandUrl { get; set; } = "/";
     [Parameter] public List<NavMenuItem> MenuItems { get; set; } = new();
 
-    private bool _isAuthenticated { get; set; }
+    private bool _isAuthenticated;
 
     protected override async Task OnInitializedAsync()
     {

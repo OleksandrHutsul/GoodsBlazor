@@ -8,41 +8,41 @@ namespace GoodsBlazor.Common.Components.ImageUploader;
 public partial class ImageUploaderComponent
 {
     [Parameter] public ProductDto Product { get; set; } = new();
-    [Inject] private IJSRuntime JS { get; set; } = default!;
+    [Inject] public required IJSRuntime JSRuntime { get; set; }
 
-    private string? PreviewImageUrl { get; set; }
-    private bool IsModalOpen { get; set; }
+    private string? _previewImageUrl;
+    private bool _isModalOpen;
 
     protected override void OnParametersSet()
     {
         if (!string.IsNullOrEmpty(Product.ImageBase64))
-            PreviewImageUrl = $"data:image/png;base64,{Product.ImageBase64}";
+            _previewImageUrl = $"data:image/png;base64,{Product.ImageBase64}";
     }
 
     private async Task OpenFilePicker()
     {
-        var result = await JS.InvokeAsync<ImageUploadResult>("openFilePicker");
+        var result = await JSRuntime.InvokeAsync<ImageUploadResult>("openFilePicker");
 
         if (result is not null)
         {
-            PreviewImageUrl = result.ObjectUrl;
+            _previewImageUrl = result.ObjectUrl;
             if (result.ByteArray?.Count > 0)
                 Product.ImageBase64 = Convert.ToBase64String(result.ByteArray.ToArray());
 
-            IsModalOpen = true;
+            _isModalOpen = true;
             StateHasChanged();
         }
     }
 
     private void ClearImage()
     {
-        PreviewImageUrl = null;
+        _previewImageUrl = null;
         Product.ImageBase64 = null;
-        IsModalOpen = false;
+        _isModalOpen = false;
     }
 
     private void OnModalStateChanged(bool isOpen)
     {
-        IsModalOpen = isOpen;
+        _isModalOpen = isOpen;
     }
 }

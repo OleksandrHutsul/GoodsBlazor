@@ -8,7 +8,7 @@ public partial class EditProductPage
 {
     [Parameter] public int? Id { get; set; }
 
-    [Inject] public required IProductService productService { get; set; }
+    [Inject] public required IProductService ProductService { get; set; }
     [Inject] public required NavigationManager NavigationManager { get; set; }
 
     private ProductDto? _product;
@@ -22,8 +22,8 @@ public partial class EditProductPage
             return;
         }
 
-        _product = await productService.GetProductByIdAsync(Id.Value);
-        _productTypes = (await productService.GetAllProductTypesAsync()).ToList();
+        _product = await ProductService.GetProductByIdAsync(Id.Value);
+        _productTypes = (await ProductService.GetAllProductTypesAsync()).ToList();
     }
 
     private async Task SaveChangesAsync()
@@ -32,7 +32,7 @@ public partial class EditProductPage
             return;
         
         Console.WriteLine($"ImageBase64 Length: {_product.ImageBase64?.Length}");
-        await productService.UpdateProductAsync(Id.Value, _product);
+        await ProductService.UpdateProductAsync(Id.Value, _product);
         BackToProductPage();
     }
 

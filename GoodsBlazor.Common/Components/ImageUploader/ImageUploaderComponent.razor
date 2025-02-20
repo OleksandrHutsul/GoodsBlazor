@@ -1,18 +1,18 @@
 ﻿@using GoodsBlazor.Common.Components.CommonModal
 
-<CommonModalComponent IsOpen="@IsModalOpen"
-                      ImageUrl="@PreviewImageUrl"
+<CommonModalComponent IsOpen="@_isModalOpen"
+                      ImageUrl="@_previewImageUrl"
                       DeleteImageCallback="@ClearImage"
-                      IsOpenChanged="@EventCallback.Factory.Create(this, (bool v) => IsModalOpen = v)" />
+                      IsOpenChanged="@EventCallback.Factory.Create(this, (bool v) => _isModalOpen = v)" />
 
 <div class="image-uploader">
-    @if (!string.IsNullOrEmpty(PreviewImageUrl))
+    @if (!string.IsNullOrEmpty(_previewImageUrl))
     {
-        @if (PreviewImageUrl.StartsWith("blob:"))
+        @if (_previewImageUrl.StartsWith("blob:"))
         {
-            <p>Blob URL: <a href="@PreviewImageUrl" target="_blank">Open Image</a></p>
+            <p>Blob URL: <a href="@_previewImageUrl" target="_blank">Open Image</a></p>
         }
-        <img src="@PreviewImageUrl" alt="Product Image" class="image-preview" />
+        <img src="@_previewImageUrl" alt="Product Image" class="image-preview" />
         <button @onclick="ClearImage" class="clear-image-btn">×</button>
     }
     else

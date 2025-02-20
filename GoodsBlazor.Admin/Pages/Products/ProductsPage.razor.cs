@@ -6,18 +6,17 @@ namespace GoodsBlazor.Admin.Pages.Products;
 
 public partial class ProductsPage
 {
-    private List<ProductDto>? ProductList;
-
     [Inject] public required IProductService ProductService { get; set; }
     [Inject] public required NavigationManager NavigationManager { get; set; }
 
     public bool _isLoading = true;
+    private List<ProductDto>? _productList;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            ProductList = await ProductService.GetAllProductsAsync();
+            _productList = await ProductService.GetAllProductsAsync();
         }
         finally
         {
@@ -37,7 +36,7 @@ public partial class ProductsPage
 
         if (response.IsSuccessStatusCode)
         {
-            ProductList = ProductList?.Where(p => p.Id != id).ToList();
+            _productList = _productList?.Where(p => p.Id != id).ToList();
             StateHasChanged();
         }
     }

@@ -23,15 +23,14 @@ public partial class CommonModalComponent
     [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
     [Parameter] public EventCallback DeleteImageCallback { get; set; } 
 
-    [Inject] private IJSRuntime JS { get; set; } = default!;
+    [Inject] public required IJSRuntime JSRuntime { get; set; }
 
     private async Task CloseModal() => IsOpen = false;
 
     private async Task OpenInNewTab()
     {
         if (!string.IsNullOrEmpty(ImageUrl))
-            await JS.InvokeVoidAsync("window.open", ImageUrl, "_blank");
-        
+            await JSRuntime.InvokeVoidAsync("window.open", ImageUrl, "_blank");
     }
 
     private async Task DeleteImage()

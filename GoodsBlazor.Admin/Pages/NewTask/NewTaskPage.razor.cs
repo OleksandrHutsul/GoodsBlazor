@@ -2,7 +2,7 @@
 
 public partial class NewTaskPage
 {
-    private bool isModalOpen;
+    private bool _isModalOpen;
 
-    private void ImageLoaded() => isModalOpen = true;
+    private void ImageLoaded() => _isModalOpen = true;
 }

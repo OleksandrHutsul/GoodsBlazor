@@ -12,7 +12,7 @@
         <div class="dropdown">
             @foreach (var item in Options)
             {
-                <div class="dropdown-item" @onclick:stopPropagation="@true" @onclick="() => SelectItem(item)">
+                <div class="dropdown-item" @onclick:stopPropagation="@true" @onclick="() => SelectItemAsync(item)">
                     @GetDisplayValue(item)
                 </div>
             }

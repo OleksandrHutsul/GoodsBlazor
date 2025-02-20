@@ -18,7 +18,7 @@ public partial class RegisterComponent
     private string? _successMessage;
     private bool _isLoading = false;    
 
-    private async Task Register()
+    private async Task RegisterAsync()
     {
         _errorMessage = null;
         _successMessage = null;

@@ -12,7 +12,7 @@ public partial class LoginComponent
     private string _password = "";
     private string? _errorMessage;
 
-    private async Task Login()
+    private async Task LoginAsync()
     {
         var success = await UserService.LoginAsync(_email, _password);
         if (success)

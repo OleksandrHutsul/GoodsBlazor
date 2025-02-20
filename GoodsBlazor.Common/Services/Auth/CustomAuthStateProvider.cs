@@ -30,14 +30,14 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         return new AuthenticationState(_currentUser);
     }
 
-    public async Task NotifyUserAuthentication(string token)
+    public async Task NotifyUserAuthenticationAsync(string token)
     {
         var identity = ParseClaimsFromJwt(token);
         _currentUser = new ClaimsPrincipal(identity);
         NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(_currentUser)));
     }
 
-    public async Task NotifyUserLogout()
+    public async Task NotifyUserLogoutAsync()
     {
         _currentUser = new ClaimsPrincipal(new ClaimsIdentity());
         NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(_currentUser)));

@@ -18,7 +18,7 @@ public partial class CreateProductPage
         _productTypes = categories.ToList();
     }
 
-    private async Task AdminCreateProduct()
+    private async Task AdminCreateProductAsync()
     {
         if (!string.IsNullOrEmpty(_product.Name) && _product.Price > 0 && _product.ProductTypeId > 0)
         {
@@ -34,9 +34,8 @@ public partial class CreateProductPage
 
     private void BackToProductPage() => NavigationManager.NavigateTo("/products");
 
-    private Task OnProductTypeSelected(ProductTypeDto selectedType)
+    private void OnProductTypeSelected(ProductTypeDto selectedType)
     {
         _product.ProductTypeId = selectedType.Id;
-        return Task.CompletedTask;
     }
 }

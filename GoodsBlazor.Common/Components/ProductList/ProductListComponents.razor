@@ -32,7 +32,7 @@ else
                     @if (IsAdmin)
                     {
                         <button class="btn edit-btn" @onclick:stopPropagation="true" @onclick="() => OnEdit.InvokeAsync(product.Id)">Edit</button>
-                        <button class="btn delete-btn" @onclick:stopPropagation="true" @onclick="() => DeleteProduct(product.Id)">Delete</button>
+                        <button class="btn delete-btn" @onclick:stopPropagation="true" @onclick="() => DeleteProductAsync(product.Id)">Delete</button>
                     }
                     else
                     {
@@ -67,7 +67,7 @@ else
                 @if (IsAdmin)
                 {
                     <button class="btn edit-btn" @onclick="() => OnEdit.InvokeAsync(SelectedProduct.Id)">Edit</button>
-                    <button class="btn delete-btn" @onclick="() => DeleteProduct(SelectedProduct.Id)">Delete</button>
+                    <button class="btn delete-btn" @onclick="() => DeleteProductAsync(SelectedProduct.Id)">Delete</button>
                 }
                 else
                 {

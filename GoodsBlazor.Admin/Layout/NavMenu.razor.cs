@@ -1,8 +1,8 @@
 ﻿using GoodsBlazor.Common.Components.Models;
 
-namespace GoodsBlazor.Admin.Layout.AdminNavMenu;
+namespace GoodsBlazor.Admin.Layout;
 
-public partial class AdminNavMenuComponent
+public partial class NavMenu
 {
     private List<NavMenuItem> AdminMenuItems = new()
     {

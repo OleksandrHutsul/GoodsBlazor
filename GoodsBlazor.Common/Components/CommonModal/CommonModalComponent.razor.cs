@@ -25,17 +25,17 @@ public partial class CommonModalComponent
 
     [Inject] public required IJSRuntime JSRuntime { get; set; }
 
-    private async Task CloseModal() => IsOpen = false;
+    private async Task CloseModalAsync() => IsOpen = false;
 
-    private async Task OpenInNewTab()
+    private async Task OpenInNewTabAsync()
     {
         if (!string.IsNullOrEmpty(ImageUrl))
             await JSRuntime.InvokeVoidAsync("window.open", ImageUrl, "_blank");
     }
 
-    private async Task DeleteImage()
+    private async Task DeleteImageAsync()
     {
         await DeleteImageCallback.InvokeAsync(); 
-        CloseModal();
+        CloseModalAsync();
     }
 }

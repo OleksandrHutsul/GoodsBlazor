@@ -19,7 +19,7 @@ public partial class ImageUploaderComponent
             _previewImageUrl = $"data:image/png;base64,{Product.ImageBase64}";
     }
 
-    private async Task OpenFilePicker()
+    private async Task OpenFilePickerAsync()
     {
         var result = await JSRuntime.InvokeAsync<ImageUploadResult>("openFilePicker");
 

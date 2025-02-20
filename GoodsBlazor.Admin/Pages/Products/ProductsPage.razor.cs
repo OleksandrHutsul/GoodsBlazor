@@ -30,7 +30,7 @@ public partial class ProductsPage
         NavigationManager.NavigateTo($"/edit-product/{id}");
     }
 
-    private async Task DeleteProduct(int id)
+    private async Task DeleteProductAsync(int id)
     {
         var response = await ProductService.DeleteProductAsync(id);
 

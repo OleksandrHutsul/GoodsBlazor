@@ -28,7 +28,7 @@ public partial class NavMenuComponent
     private async Task LogoutAsync()
     {
         await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "accessToken");
-        await CustomAuthStateProvider.NotifyUserLogout();
+        await CustomAuthStateProvider.NotifyUserLogoutAsync();
         NavigationManager.NavigateTo("/", forceLoad: true);
     }
 }

@@ -24,7 +24,7 @@
             <input @bind="_password" type="password" class="form-control" />
         </div>
 
-        <button @onclick="Register" class="btn-register" disabled="@_isLoading">
+        <button @onclick="RegisterAsync" class="btn-register" disabled="@_isLoading">
             @(_isLoading ? "Registration..." : "Register")
         </button>
 

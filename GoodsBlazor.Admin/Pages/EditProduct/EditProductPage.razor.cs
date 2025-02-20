@@ -36,10 +36,9 @@ public partial class EditProductPage
         BackToProductPage();
     }
 
-    private Task OnProductTypeSelected(ProductTypeDto selectedType)
+    private void OnProductTypeSelected(ProductTypeDto selectedType)
     {
         _product.ProductTypeId = selectedType.Id;
-        return Task.CompletedTask;
     }
 
     private void BackToProductPage() => NavigationManager.NavigateTo("/products");

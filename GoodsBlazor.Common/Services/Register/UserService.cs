@@ -56,11 +56,11 @@ public class UserService : IUserService
         if (!string.IsNullOrEmpty(authResult.AccessToken))
         {
             await _jsRuntime.InvokeVoidAsync("localStorage.setItem", "accessToken", authResult.AccessToken);
-            await ((CustomAuthStateProvider)_authStateProvider).NotifyUserAuthentication(authResult.AccessToken);
+            await ((CustomAuthStateProvider)_authStateProvider).NotifyUserAuthenticationAsync(authResult.AccessToken);
         }
         else
         {
-            await ((CustomAuthStateProvider)_authStateProvider).NotifyUserAuthentication("");
+            await ((CustomAuthStateProvider)_authStateProvider).NotifyUserAuthenticationAsync("");
         }
 
         return true;

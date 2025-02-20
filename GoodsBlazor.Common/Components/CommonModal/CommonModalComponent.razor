@@ -1,13 +1,13 @@
 @if (IsOpen)
 {
-    <div class="modal-backdrop" @onclick="CloseModal">
+    <div class="modal-backdrop" @onclick="CloseModalAsync">
         <div class="modal-content" @onclick:stopPropagation>
             <p class="modal-message">What to do with the image?</p>
 
             <div class="modal-actions">
-                <button class="modal-button" @onclick="OpenInNewTab">Open</button>
-                <button class="modal-button delete-btn" @onclick="DeleteImage">Delete</button>
-                <button class="modal-button close-btn" @onclick="CloseModal">Close</button>
+                <button class="modal-button" @onclick="OpenInNewTabAsync">Open</button>
+                <button class="modal-button delete-btn" @onclick="DeleteImageAsync">Delete</button>
+                <button class="modal-button close-btn" @onclick="CloseModalAsync">Close</button>
             </div>
         </div>
     </div>

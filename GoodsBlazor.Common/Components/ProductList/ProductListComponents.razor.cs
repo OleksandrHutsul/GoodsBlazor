@@ -13,7 +13,7 @@ public partial class ProductListComponents
 
     private ProductDto? SelectedProduct { get; set; }
 
-    private async Task DeleteProduct(int productId)
+    private async Task DeleteProductAsync(int productId)
     {
         Console.WriteLine($"Deleting product with ID: {productId}");
         await OnDelete.InvokeAsync(productId);

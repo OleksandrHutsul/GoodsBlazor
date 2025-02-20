@@ -15,7 +15,7 @@ public partial class BCHSelectComponent<T>
         _isOpened = !_isOpened;
     }
 
-    private async Task SelectItem(T item)
+    private async Task SelectItemAsync(T item)
     {
         _selectedItem = item;
         _isOpened = false;
